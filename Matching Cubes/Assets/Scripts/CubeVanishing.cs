@@ -52,7 +52,7 @@ public class CubeVanishing : MonoBehaviour
     }
     private void BeSmaller(float aspect )
     {
-        transform.localScale = Vector3.Lerp(CubeAndPlayerAvatarCommons.firstScaleEveryCube, Vector3.zero, aspect*4);
+        transform.localScale = Vector3.Lerp(CubeAndPlayerAvatarCommons.firstScaleEveryCube*1.3f, Vector3.zero, aspect*4);
 
     }
 }

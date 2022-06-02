@@ -37,6 +37,13 @@ public class Cube : MonoBehaviour
         joining(index);
         
     }
+    public int RandomCubeNumber
+    {
+        get
+        {
+            return Random.Range(0, 100);
+        }
+    }
 
     // after combo
     public void SettingAfterCubeCombo(int index)
@@ -71,7 +78,7 @@ public class Cube : MonoBehaviour
     {
 
         transform.parent = CubesController.Instance.transform;
-       
+        GetComponent<Collider>().enabled = false;
 
 
         Vector3 CoroutineStartScale = transform.localScale;

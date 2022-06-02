@@ -8,7 +8,7 @@ public class CubeColorController : MonoBehaviour
 
     public Material CubeMaterial;
     
-    [HideInInspector]public string CubeCode;
+    [HideInInspector] public string CubeCode;
     private void OnValidate()
     {
         GetComponent<MeshRenderer>().material = CubeMaterial;

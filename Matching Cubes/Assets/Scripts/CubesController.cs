@@ -40,6 +40,9 @@ public class CubesController : MonoSingleton<CubesController>
             index++;
         }
         playerAvatar.SettingAfterCubeCombo(index);
+
+        
+
         
     }
 
@@ -56,6 +59,10 @@ public class CubesController : MonoSingleton<CubesController>
 
 
     private void CubesOrderCheck()
+    {
+        StartCoroutine(CubesOrderCheckIEnumerator());
+    }
+    private IEnumerator CubesOrderCheckIEnumerator()
     {
         int stackCounter = 0;
         string cubeType =_cubes[0].CubeCode ;
@@ -77,10 +84,14 @@ public class CubesController : MonoSingleton<CubesController>
                         _cubes.RemoveAt(i-k);
                         
                     }
+
+                    yield return new WaitForSeconds(0.2f);
                     SettingAfterComboCube();
 
+                    yield return new WaitForSeconds(0.5f);
+                    i =0;
 
-                    break;
+                    
 
                 }
             }
@@ -109,9 +120,16 @@ public class CubesController : MonoSingleton<CubesController>
             
             AddNewCube(collision.gameObject.GetComponent<Cube>());
         }
-        else if(collision.gameObject.CompareTag("OrderGate"))
+        else if(collision.gameObject.CompareTag("OrderGate") )
         {
+            
             _cubes = _cubes.OrderBy(x => x.CubeCode).ToList();
+            SettingReorder();
+            CubesOrderCheck();
+        }
+        else if(collision.gameObject.CompareTag("RandomGate"))
+        {
+            _cubes = _cubes.OrderBy(x => x.RandomCubeNumber).ToList();
             SettingReorder();
             CubesOrderCheck();
         }
