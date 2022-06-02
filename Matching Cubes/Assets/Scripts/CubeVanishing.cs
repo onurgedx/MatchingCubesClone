@@ -7,6 +7,8 @@ public class CubeVanishing : MonoBehaviour
     private MaterialPropertyBlock _materialPropertyBlock=null;
     private MeshRenderer _meshRenderer;
     private  Color firstColor;
+    public float vanishDuration = 0.25f;
+   
      private void Awake()
     {
         _materialPropertyBlock = new MaterialPropertyBlock();
@@ -16,10 +18,41 @@ public class CubeVanishing : MonoBehaviour
     }
     private void OnEnable()
     {
-        _materialPropertyBlock.SetColor("_Color", Color.white);
+
+        StartCoroutine(BeNothing());
+    }
+
+    private IEnumerator BeNothing()
+    {
+
+        SetColorWithPropertyBlock(Color.white);
+        float timeCounter = 0;
+        while (timeCounter < vanishDuration)
+        {
+            timeCounter += Time.deltaTime;
+
+            Color clr = Color.Lerp(Color.white, firstColor, timeCounter);
+            SetColorWithPropertyBlock(clr);
+            BeSmaller(timeCounter);
+
+            yield return null;
+
+        }
+
+        yield return null;
+        Destroy(gameObject);
+    }
+
+
+    private void SetColorWithPropertyBlock(Color clr)
+    {
+        _materialPropertyBlock.SetColor("_Color", clr);
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
-        // bir seyler olucak iste
-        
+
+    }
+    private void BeSmaller(float aspect )
+    {
+        transform.localScale = Vector3.Lerp(CubeAndPlayerAvatarCommons.firstScaleEveryCube, Vector3.zero, aspect*4);
 
     }
 }

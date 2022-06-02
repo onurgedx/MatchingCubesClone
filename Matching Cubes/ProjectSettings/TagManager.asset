@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cube
+  - CubesUnderPlayer
+  - RampEnterance
+  - RampExit
+  - OrderGate
+  - RandomGate
   layers:
   - Default
   - TransparentFX
@@ -12,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ramp
   - 
   - 
   - 

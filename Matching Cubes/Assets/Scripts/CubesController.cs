@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class CubesController : MonoSingleton<CubesController>
 {
 
@@ -9,6 +9,7 @@ public class CubesController : MonoSingleton<CubesController>
 
     public PlayerAvatar playerAvatar;
 
+    public int ComboCubeCount = 3;
    
 
     private void AddNewCube(Cube cube)
@@ -16,16 +17,43 @@ public class CubesController : MonoSingleton<CubesController>
         
         _cubes.Insert(0,cube);
 
+        SettingAllCubesAndPlayerAvatar();
+       CubesOrderCheck();
+        
+    }
+    private void SettingAllCubesAndPlayerAvatar()
+    {
         int index = 0;
-        foreach(Cube go in _cubes)
-        { 
+        foreach (Cube go in _cubes)
+        {
             go.CubeSetting(index);
             index++;
         }
         playerAvatar.Setting(index);
-        CubesOrderCheck();
+    }
+    private void SettingAfterComboCube()
+    {
+        int index = 0;
+        foreach(Cube go in _cubes)
+        {
+            go.SettingAfterCubeCombo(index);
+            index++;
+        }
+        playerAvatar.SettingAfterCubeCombo(index);
+        
+    }
+
+    private void SettingReorder()
+    {
+        int index = 0;
+        foreach(Cube go in _cubes)
+        {
+            go.SettingReorder(index);
+            index++;
+        }
 
     }
+
 
     private void CubesOrderCheck()
     {
@@ -36,18 +64,30 @@ public class CubesController : MonoSingleton<CubesController>
             if(cubeType==_cubes[i].CubeCode)
             {
                 stackCounter++;
-                if(stackCounter==3)
+                if(stackCounter==ComboCubeCount)
                 {
-                    _cubes[i].Vanish();
-                    _cubes[i - 1].Vanish();
-                    _cubes[i - 2].Vanish();
-                   
-                    
+                    for(int k=0;k<ComboCubeCount;k++)
+                    {
+                        _cubes[i - k].Vanish();
+
+                    }
+
+                    for (int k = 0; k < ComboCubeCount; k++)
+                    {
+                        _cubes.RemoveAt(i-k);
+                        
+                    }
+                    SettingAfterComboCube();
+
+
                     break;
 
                 }
             }
-            
+            else { 
+            cubeType = _cubes[i].CubeCode;
+            stackCounter = 1;
+            }
             
            
         }
@@ -69,6 +109,15 @@ public class CubesController : MonoSingleton<CubesController>
             
             AddNewCube(collision.gameObject.GetComponent<Cube>());
         }
+        else if(collision.gameObject.CompareTag("OrderGate"))
+        {
+            _cubes = _cubes.OrderBy(x => x.CubeCode).ToList();
+            SettingReorder();
+            CubesOrderCheck();
+        }
+
+
+
     }
 
     

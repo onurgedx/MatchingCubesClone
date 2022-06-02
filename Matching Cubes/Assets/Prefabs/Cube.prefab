@@ -11,11 +11,13 @@ GameObject:
   - component: {fileID: 2137447558407641240}
   - component: {fileID: 2137447558407641245}
   - component: {fileID: 2137447558407641246}
-  - component: {fileID: 2137447558407641244}
   - component: {fileID: 2137447558407641247}
+  - component: {fileID: 2137447558407641244}
+  - component: {fileID: 6007401271163006152}
+  - component: {fileID: 6858926536396499592}
   - component: {fileID: 6889176413955249341}
   - component: {fileID: 3077291050078517698}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Cube
   m_Icon: {fileID: 0}
@@ -85,6 +87,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2137447558407641247
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137447558407641241}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2137447558407641244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,20 +114,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLocalPosition: {x: 0, y: 0, z: 0}
   _cubeVanishing: {fileID: 3077291050078517698}
+  _cubeAfterCombo: {fileID: 6007401271163006152}
+  _cubeReorder: {fileID: 6858926536396499592}
   CubeCode: RedCube
---- !u!65 &2137447558407641247
-BoxCollider:
+--- !u!114 &6007401271163006152
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137447558407641241}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd555ca9e451334f9d83d16a0806f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6858926536396499592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137447558407641241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f4891ec2aa44a4ba93e991c22b2ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6889176413955249341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,3 +167,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4b68488f009774f94e2dbebf0ac32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vanishDuration: 0.25

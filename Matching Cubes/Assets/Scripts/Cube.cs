@@ -12,6 +12,8 @@ public class Cube : MonoBehaviour
     public Vector3 currentLocalPosition;
 
     [SerializeField] private CubeVanishing _cubeVanishing;
+    [SerializeField] private CubeAfterCombo _cubeAfterCombo;
+    [SerializeField] private CubeReorder _cubeReorder;
 
 
     [HideInInspector] public string CubeCode;
@@ -24,12 +26,32 @@ public class Cube : MonoBehaviour
         firstScale = transform.localScale;
         Vector3 currentLocalPosition = transform.localPosition;
     }
+
+
+    //public void Down
+
+  
     public void CubeSetting(int index)
     {
-        
+        StopAllCoroutines();
         joining(index);
         
     }
+
+    // after combo
+    public void SettingAfterCubeCombo(int index)
+    {
+        StopAllCoroutines();
+        _cubeAfterCombo.SettingAfterCubeCombo(index);
+
+    }
+    
+    public void SettingReorder(int index)
+    {
+        _cubeReorder.SettingReordering(index);
+    }
+
+
     
     public void FirstJoining(int index)
     {
@@ -41,7 +63,7 @@ public class Cube : MonoBehaviour
     }
     public void Settings(int index)
     {
-        StartCoroutine(SettingsIEnumerator( index));
+             StartCoroutine(SettingsIEnumerator( index));
 
     }
 

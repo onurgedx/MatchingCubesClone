@@ -12,6 +12,9 @@ public class Player : MonoSingleton<Player>
     public float maxRight;
 
 
+
+    public Transform RaycastOriginForRampControl;
+
     public delegate void PlayerMovement(float rightSlideAmount);
     public PlayerMovement playerMovement;
 
@@ -19,6 +22,7 @@ public class Player : MonoSingleton<Player>
     {
         playerMovement += ForwardGo;
         playerMovement += RightGo;
+        playerMovement += AlwaysOnPlaneMovement;
     }
     public void ForwardGo(float rightSlideAmount)
     {
@@ -34,6 +38,42 @@ public class Player : MonoSingleton<Player>
         transform.position = currentPosition;
 
     }
+    
+    public void AlwaysOnPlaneMovement(float righSlideAmount)
+    {
+
+        
+        if(Physics.Raycast(RaycastOriginForRampControl.position,Vector3.down,out RaycastHit hitInfo))
+        {
+            
+                
+                Vector3 currentPosition = transform.position;
+                currentPosition.y = Mathf.Lerp(currentPosition.y, hitInfo.point.y,0.5f);
+                transform.position = currentPosition;
+            
+        }
+
+    }
+
+  
+    public void EntryRamp()
+    {
+       
+        
+        playerMovement = AlwaysOnPlaneMovement;
+        playerMovement += ForwardGo;
+       
+
+    }
+
+    public void ExitRamp()
+    {
+        playerMovement = AlwaysOnPlaneMovement;
+        playerMovement += ForwardGo;
+        playerMovement += RightGo;
+        
+    }
+    
 
 
 }

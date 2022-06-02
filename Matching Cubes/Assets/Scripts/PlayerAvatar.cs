@@ -5,21 +5,54 @@ using UnityEngine;
 public class PlayerAvatar : MonoBehaviour
 {
 
-   
-    
+
+    private Vector3 currentLocalPosition ;
 
     private void Start()
     {
-   
+        currentLocalPosition = transform.localPosition;
+
     }
+
+
+    public void SettingAfterCubeCombo(int index)
+    {
+        StopAllCoroutines();
+        StartCoroutine(SettingAfterCubeComboIEnumerator(index));
+
+    }
+    private IEnumerator SettingAfterCubeComboIEnumerator(int index)
+    {
+        yield return new WaitForSeconds(0.05f*index);
+        float timeCounter = 0;
+        Vector3 coroutineFirstPosition = transform.localPosition;
+
+        while (timeCounter < 1)
+        {
+            timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime * CubeAndPlayerAvatarCommons.DownSpeed, 0, 1);
+            currentLocalPosition.y = Mathf.Lerp(coroutineFirstPosition.y, index, timeCounter);
+
+            transform.localPosition = currentLocalPosition;
+
+            yield return null;
+        }
+
+
+
+        yield return null;
+
+
+    }
+
     public void Setting(int index)
     {
+        StopAllCoroutines();
         StartCoroutine(SettingIEnumerator(index));
 
     }
 
     private IEnumerator SettingIEnumerator(int index)
-    {Vector3 currentLocalPosition = transform.localPosition;
+    {
         Vector3 CoroutineStartLocalPosition = currentLocalPosition;
 
         float timeCounter = 0;

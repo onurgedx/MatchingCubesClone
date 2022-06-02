@@ -8,4 +8,5 @@ public class CubeAndPlayerAvatarCommons : MonoBehaviour
 
     public static float UpSpeed = 6f;
     public static float DownSpeed = 4f;
+    public static Vector3 firstScaleEveryCube = Vector3.one;
 }
