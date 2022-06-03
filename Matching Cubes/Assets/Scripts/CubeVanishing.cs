@@ -38,6 +38,7 @@ public class CubeVanishing : MonoBehaviour
             yield return null;
 
         }
+        CanvasManager.Instance.HeartGoesToTopLeftFromCube(transform.position);
 
         yield return null;
         Destroy(gameObject);
@@ -55,4 +56,7 @@ public class CubeVanishing : MonoBehaviour
         transform.localScale = Vector3.Lerp(CubeAndPlayerAvatarCommons.firstScaleEveryCube*1.3f, Vector3.zero, aspect*4);
 
     }
+
+
+
 }

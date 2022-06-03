@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-
+    
     private Vector3 firstScale;
     private Vector3 firstLocalPos; 
      delegate void Joining( int index);
@@ -28,11 +28,10 @@ public class Cube : MonoBehaviour
     }
 
 
-    //public void Down
-
-  
+   
     public void CubeSetting(int index)
     {
+        
         StopAllCoroutines();
         joining(index);
         
@@ -48,6 +47,7 @@ public class Cube : MonoBehaviour
     // after combo
     public void SettingAfterCubeCombo(int index)
     {
+       
         StopAllCoroutines();
         _cubeAfterCombo.SettingAfterCubeCombo(index);
 
@@ -55,6 +55,7 @@ public class Cube : MonoBehaviour
     
     public void SettingReorder(int index)
     {
+        
         _cubeReorder.SettingReordering(index);
     }
 
@@ -70,15 +71,17 @@ public class Cube : MonoBehaviour
     }
     public void Settings(int index)
     {
-             StartCoroutine(SettingsIEnumerator( index));
+        
+        StartCoroutine(SettingsIEnumerator( index));
 
     }
 
     private IEnumerator FirstJoiningIEnumerator(int index)
     {
-
-        transform.parent = CubesController.Instance.transform;
-        GetComponent<Collider>().enabled = false;
+        gameObject.tag = "CubeGained";
+        transform.parent = CubesController.Instance.CubesListGameObject.transform;
+        // colliderleri iptal oluyordu burda artýk olmuyor
+        //GetComponent<Collider>().enabled = false;
 
 
         Vector3 CoroutineStartScale = transform.localScale;

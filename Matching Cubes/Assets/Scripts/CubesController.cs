@@ -10,8 +10,10 @@ public class CubesController : MonoSingleton<CubesController>
     public PlayerAvatar playerAvatar;
 
     public int ComboCubeCount = 3;
-   
 
+    public float durationTransferFromVanishToCombo;
+    public float durationTransferFromComboToNextIterator;
+    public GameObject CubesListGameObject;
     private void AddNewCube(Cube cube)
     {
         
@@ -85,13 +87,13 @@ public class CubesController : MonoSingleton<CubesController>
                         
                     }
 
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(durationTransferFromVanishToCombo);
                     SettingAfterComboCube();
 
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(durationTransferFromComboToNextIterator);
                     i =0;
 
-                    
+                    stackCounter = 0;
 
                 }
             }
@@ -107,6 +109,15 @@ public class CubesController : MonoSingleton<CubesController>
 
         
 
+    }
+
+
+    public void ExtractFromCubes(Cube cube)
+    {
+        Debug.Log("extractfromcubes");
+        cube.transform.parent = null;
+        _cubes.Remove(cube);
+        SettingAfterComboCube();
     }
 
 
@@ -133,6 +144,7 @@ public class CubesController : MonoSingleton<CubesController>
             SettingReorder();
             CubesOrderCheck();
         }
+        
 
 
 

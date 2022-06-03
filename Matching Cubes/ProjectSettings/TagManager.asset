@@ -10,6 +10,8 @@ TagManager:
   - RampExit
   - OrderGate
   - RandomGate
+  - ObstacleCube
+  - CubeGained
   layers:
   - Default
   - TransparentFX
@@ -18,10 +20,10 @@ TagManager:
   - Water
   - UI
   - Ramp
-  - 
-  - 
-  - 
-  - 
+  - Gate
+  - Ground
+  - Cube
+  - ObstacleCube
   - 
   - 
   - 
