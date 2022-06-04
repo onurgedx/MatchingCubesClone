@@ -5,7 +5,8 @@ using System.Linq;
 public class CubesController : MonoSingleton<CubesController>
 {
 
-    private List<Cube> _cubes=new List<Cube>();
+     
+    [SerializeField] public List<Cube> _cubes=new List<Cube>();
 
     public PlayerAvatar playerAvatar;
 
@@ -23,6 +24,8 @@ public class CubesController : MonoSingleton<CubesController>
        CubesOrderCheck();
         
     }
+
+
     private void SettingAllCubesAndPlayerAvatar()
     {
         int index = 0;
@@ -114,7 +117,7 @@ public class CubesController : MonoSingleton<CubesController>
 
     public void ExtractFromCubes(Cube cube)
     {
-        Debug.Log("extractfromcubes");
+        
         cube.transform.parent = null;
         _cubes.Remove(cube);
         SettingAfterComboCube();
@@ -151,6 +154,6 @@ public class CubesController : MonoSingleton<CubesController>
     }
 
     
-
+   
 
 }
