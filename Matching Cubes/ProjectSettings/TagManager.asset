@@ -12,6 +12,8 @@ TagManager:
   - RandomGate
   - ObstacleCube
   - CubeGained
+  - FlyRamp
+  - SpeedUp
   layers:
   - Default
   - TransparentFX
@@ -24,8 +26,8 @@ TagManager:
   - Ground
   - Cube
   - ObstacleCube
-  - 
-  - 
+  - FlyRamp
+  - SpeedUp
   - 
   - 
   - 
