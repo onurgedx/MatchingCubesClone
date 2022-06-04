@@ -14,6 +14,7 @@ TagManager:
   - CubeGained
   - FlyRamp
   - SpeedUp
+  - Serit
   layers:
   - Default
   - TransparentFX
@@ -28,8 +29,8 @@ TagManager:
   - ObstacleCube
   - FlyRamp
   - SpeedUp
-  - 
-  - 
+  - Serit
+  - PlayerAvatar
   - 
   - 
   - 
