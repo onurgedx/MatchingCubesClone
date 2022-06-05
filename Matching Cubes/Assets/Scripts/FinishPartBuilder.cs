@@ -6,6 +6,7 @@ public class FinishPartBuilder : MonoBehaviour
 {
     public GameObject Serit;
     public int seritAmount;
+    public GameObject winning;
 
     private void Awake()
     {
@@ -20,6 +21,8 @@ public class FinishPartBuilder : MonoBehaviour
 
 
         }        
+
+        winning.transform.position = new Vector3(transform.position.x, transform.position.y , transform.position.z + (seritAmount +1 ) * 4);
 
 
     }

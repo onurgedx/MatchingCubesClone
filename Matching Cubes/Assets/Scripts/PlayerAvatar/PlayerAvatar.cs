@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAvatar : MonoBehaviour
+public class PlayerAvatar :MonoSingleton<PlayerAvatar>
 {
 
-
+    [SerializeField]private AnimatorManager _animator;
     private Vector3 currentLocalPosition ;
 
     private void Start()
@@ -13,18 +13,20 @@ public class PlayerAvatar : MonoBehaviour
         currentLocalPosition = transform.localPosition;
 
     }
+    
 
 
     public void SettingAfterCubeCombo(int index)
     {
         StopAllCoroutines();
+        AnimationSetting(index);
         
         StartCoroutine(SettingAfterCubeComboIEnumerator(index));
 
     }
     private IEnumerator SettingAfterCubeComboIEnumerator(int index)
     {
-        yield return new WaitForSeconds(0.05f*index);
+        yield return new WaitForSeconds(0.075f*index);
         float timeCounter = 0;
         Vector3 coroutineFirstPosition = transform.localPosition;
 
@@ -45,9 +47,15 @@ public class PlayerAvatar : MonoBehaviour
 
     }
 
+    
+
     public void Setting(int index)
     {
-        
+        StopAllCoroutines();
+        AnimationSetting(index);
+       
+
+
         StartCoroutine(SettingIEnumerator(index));
 
     }
@@ -75,9 +83,26 @@ public class PlayerAvatar : MonoBehaviour
             transform.localPosition = currentLocalPosition;
             yield return null;
         }
-        currentLocalPosition.y = index;
-        transform.localPosition = currentLocalPosition;
+        //currentLocalPosition.y = index;
+      //  transform.localPosition = currentLocalPosition;
 
-        yield return null;
+        
     }
+
+
+    public void AnimationSetting(int index)
+    {
+        if (index == 0)
+        {
+            _animator.Run();
+        }
+        else
+        {
+            _animator.Skate();
+        }
+
+    }
+
+
+
 }

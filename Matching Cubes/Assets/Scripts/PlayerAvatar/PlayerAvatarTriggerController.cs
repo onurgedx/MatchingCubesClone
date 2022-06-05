@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class PlayerAvatarTriggerController : MonoBehaviour
 {
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Serit"))
         {
-            Debug.Log("dead");
+            Player.Instance.ForwardSpeed = 0;
+            Player.Instance.ForwardSpeedExtra = 0;
+            AnimatorManager.Instance.Dying();
+            
         }
     }
 }

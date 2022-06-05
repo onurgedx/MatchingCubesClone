@@ -91,7 +91,7 @@ public class Cube : MonoBehaviour
         {
             timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime*50, 0, 1);
             transform.localScale = Vector3.Lerp(CoroutineStartScale, CoroutineStartScale * 1.5f, timeCounter);
-            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, timeCounter);
+             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, timeCounter);
             yield return null;
 
         }

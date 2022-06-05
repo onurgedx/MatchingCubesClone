@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoSingleton<Player>
 {
 
-    private float ForwardSpeedExtra;
+    [HideInInspector]public float ForwardSpeedExtra;
     public float ForwardSpeed;
     public float RightSpeed;
 
@@ -19,6 +19,8 @@ public class Player : MonoSingleton<Player>
     public delegate void PlayerMovement(float rightSlideAmount);
     public PlayerMovement playerMovement;
 
+
+    [SerializeField]private AnimatorManager _animatormanager;
     private void Awake()
     {
 
@@ -93,9 +95,11 @@ public class Player : MonoSingleton<Player>
         playerMovement = AlwaysOnPlaneMovement;
         playerMovement += ForwardGo;
         playerMovement += RightGo;
+        PlayerAvatar.Instance.AnimationSetting(CubesController.Instance._cubes.Count);
     }
     public void Flying(float rightSlideAmount)
     {
+        _animatormanager.Fly();
 
     }
     
@@ -109,6 +113,7 @@ public class Player : MonoSingleton<Player>
 
     private IEnumerator FlyIEnumerator(Vector3 FinishPoint,float AspectJumpHeight)
     {
+        
         playerMovement =Flying;
 
         Vector3 StartPoint = transform.position;

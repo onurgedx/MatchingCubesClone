@@ -15,9 +15,9 @@ public class ObstacleCube : MonoBehaviour
         
          if(collision.transform.gameObject.CompareTag("CubeGained"))
         {
-            gameObject.layer = 8;
-            CubesController.Instance.ExtractFromCubes(collision.gameObject.GetComponent<Cube>());
-//            _collider.enabled = false;
+           // gameObject.layer = 8;
+          //  CubesController.Instance.ExtractFromCubes(collision.gameObject.GetComponent<Cube>());
+            //_collider.enabled = false;
         }
     }
     

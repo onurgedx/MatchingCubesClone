@@ -15,6 +15,8 @@ public class CubesController : MonoSingleton<CubesController>
     public float durationTransferFromVanishToCombo;
     public float durationTransferFromComboToNextIterator;
     public GameObject CubesListGameObject;
+
+    private int fewerCount = 0;
     private void AddNewCube(Cube cube)
     {
         
@@ -28,6 +30,7 @@ public class CubesController : MonoSingleton<CubesController>
 
     private void SettingAllCubesAndPlayerAvatar()
     {
+        
         int index = 0;
         foreach (Cube go in _cubes)
         {
@@ -36,8 +39,9 @@ public class CubesController : MonoSingleton<CubesController>
         }
         playerAvatar.Setting(index);
     }
-    private void SettingAfterComboCube()
+    public void SettingAfterComboCube()
     {
+
         int index = 0;
         foreach(Cube go in _cubes)
         {
@@ -69,6 +73,8 @@ public class CubesController : MonoSingleton<CubesController>
     }
     private IEnumerator CubesOrderCheckIEnumerator()
     {
+        if (_cubes.Count == 0) yield break;
+
         int stackCounter = 0;
         string cubeType =_cubes[0].CubeCode ;
         for(int i=0;i<_cubes.Count;i++)
@@ -78,7 +84,8 @@ public class CubesController : MonoSingleton<CubesController>
                 stackCounter++;
                 if(stackCounter==ComboCubeCount)
                 {
-                    for(int k=0;k<ComboCubeCount;k++)
+                    fewerBoost();
+                    for (int k=0;k<ComboCubeCount;k++)
                     {
                         _cubes[i - k].Vanish();
 
@@ -94,9 +101,9 @@ public class CubesController : MonoSingleton<CubesController>
                     SettingAfterComboCube();
 
                     yield return new WaitForSeconds(durationTransferFromComboToNextIterator);
-                    i =0;
 
-                    stackCounter = 0;
+                    CubesOrderCheck();
+                    break;
 
                 }
             }
@@ -114,13 +121,22 @@ public class CubesController : MonoSingleton<CubesController>
 
     }
 
+    private void fewerBoost()
+    {
+        
+        fewerCount++;
+        if (fewerCount % 3 == 0)
+        {
+            Player.Instance.ExtraForwardSpeedUp(10);
+        }
+    }
 
     public void ExtractFromCubes(Cube cube)
     {
         
         cube.transform.parent = null;
         _cubes.Remove(cube);
-        SettingAfterComboCube();
+     
     }
 
 
@@ -152,8 +168,16 @@ public class CubesController : MonoSingleton<CubesController>
 
 
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("ObstacleCube"))
+        {
+            SettingAfterComboCube();
+        }
 
-    
-   
+    }
+
+
+
 
 }
