@@ -8,6 +8,13 @@ public class CanvasManager : MonoSingleton<CanvasManager>
     [SerializeField] private GameObject HeartImage;
     private int GainedHeartCount=0;
 
+    public Text textLevel;
+
+    private void Awake()
+    {
+        textLevel.text = LevelManager.Instance.LevelName;
+        
+    }
 
     public void HeartGoesToTopLeftFromCube(Vector3 startPos)
     {
@@ -24,7 +31,7 @@ public class CanvasManager : MonoSingleton<CanvasManager>
         float timeCounter = 0;
         while(timeCounter<1)
         {
-            timeCounter += Time.deltaTime*0.5f;
+            timeCounter += Time.deltaTime;
             obj.transform.position = Vector3.Lerp(startPos, HeartImage.transform.position, timeCounter);
             yield return null;
         }

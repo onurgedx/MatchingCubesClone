@@ -8,8 +8,8 @@ public class Winning : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerAvatar"))
         {
-            Debug.Log("You win");
-            
+            LevelManager.Instance.NextLevel();
+           
             
         }
     }

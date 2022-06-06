@@ -6,6 +6,8 @@ public class Trailer : MonoBehaviour
 {
 
 
+    public GameObject pool;
+
     private List<GameObject> Tracks = new List<GameObject>();
 
     public GameObject ObjectToPooling;
@@ -14,14 +16,14 @@ public class Trailer : MonoBehaviour
     {
         for(int i=0; i < poolAmount; i++)
         {
-            GameObject obj = Instantiate(ObjectToPooling,null);
+            GameObject obj = Instantiate(ObjectToPooling,pool.transform);
             obj.SetActive(false);
             Tracks.Add(obj);
         }
         
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         
         if (CubesController.Instance._cubes.Count > 0  && Player.Instance.playerMovement !=Player.Instance.Flying) { 
@@ -44,7 +46,7 @@ public class Trailer : MonoBehaviour
             }
         }
 
-        GameObject obj = Instantiate(ObjectToPooling, null);
+        GameObject obj = Instantiate(ObjectToPooling, pool.transform);
         obj.SetActive(false);
         Tracks.Add(obj);
         return obj;
