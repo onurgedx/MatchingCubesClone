@@ -89,7 +89,7 @@ public class Cube : MonoBehaviour
         // scale increase
         while (timeCounter<1 )
         {
-            timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime*50, 0, 1);
+            timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime*60, 0, 1);
             transform.localScale = Vector3.Lerp(CoroutineStartScale, CoroutineStartScale * 1.5f, timeCounter);
              transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, timeCounter);
             yield return null;
@@ -99,7 +99,7 @@ public class Cube : MonoBehaviour
         timeCounter = 0;
         while (timeCounter<1)
         {
-            timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime * 40,0,1);
+            timeCounter = Mathf.Clamp(timeCounter + Time.deltaTime * 60,0,1);
             transform.localScale = Vector3.Lerp(CoroutineStartScale, firstScale,timeCounter);
             yield return null;
         }
