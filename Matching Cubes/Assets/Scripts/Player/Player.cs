@@ -33,6 +33,7 @@ public class Player : MonoSingleton<Player>
     }
     public void ForwardGo(float rightSlideAmount)
     {
+      
         transform.position += Vector3.forward * Time.deltaTime * (ForwardSpeed+ForwardSpeedExtra);
 
     }
@@ -42,7 +43,8 @@ public class Player : MonoSingleton<Player>
         Vector3 currentPosition = transform.position;
         currentPosition.x += RightSpeed * rightSlideAmount;
         currentPosition.x = Mathf.Clamp(currentPosition.x, minRight, maxRight);
-        transform.position = currentPosition;
+        
+         transform.position = currentPosition;
 
     }
     

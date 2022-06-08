@@ -22,9 +22,20 @@ public class Cube : MonoBehaviour
 
         joining += FirstJoining;
         joining += Settings;
+        joining += AdjustScale;
 
         firstScale = transform.localScale;
         Vector3 currentLocalPosition = transform.localPosition;
+    }
+    
+    public void AdjustScale(int index)
+    {
+        if(index!=0)
+        {
+            transform.localScale = firstScale;
+            joining -= AdjustScale;
+        }
+
     }
 
 
